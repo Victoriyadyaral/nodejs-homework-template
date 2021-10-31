@@ -48,7 +48,7 @@ router.post('/', async (req, res, next) => {
   try {
     const { error } = joiSchema.validate(req.body)
     if (error) {
-      throw new BadRequest(error.message)
+      throw new BadRequest(`Missing ${error.message}`)
     }
     const result = await contactOperations.addContact(req.body)
     res.status(201).json({
@@ -73,7 +73,7 @@ router.delete('/:contactId', async (req, res, next) => {
     res.json({
       status: 'success',
       code: 200,
-      message: 'Remove success'
+      message: 'Contact deleted'
     })
   } catch (error) {
     next(error)
@@ -84,7 +84,7 @@ router.put('/:contactId', async (req, res, next) => {
   try {
     const { error } = joiSchema.validate(req.body)
     if (error) {
-      throw new BadRequest(error.message)
+      throw new BadRequest(`Missing ${error.message}`)
     }
     const { contactId } = req.params
     const result = await contactOperations.updateContact(contactId, req.body)
