@@ -63,7 +63,7 @@ describe('tests for middleware by authorization', function () {
     expect(mockNext).toHaveBeenCalledWith(new Unauthorized('jwt must be provided'))
   })
 
-  it('token isvalid in the header', async () => {
+  it('token is valid in the header', async () => {
     await authenticate(mockReq, mockRes, mockNext)
     expect(mockReq.headers.authorization).toBe(`Bearer ${token}`)
     expect(mockReq.user._id).toEqual(user._id)
