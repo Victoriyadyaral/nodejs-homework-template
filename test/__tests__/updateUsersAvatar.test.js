@@ -8,21 +8,22 @@ const user = {
   email: 'evd@example.com',
   subscription: 'starter',
   avatarURL: '\\users\\619d6e5dba5b038224aaffe3\\619d6e5dba5b038224aaffe3_24-11-2021_12-37-56_images.jpeg',
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWQ2ZTVkYmE1YjAzODIyNGFhZmZlMyIsImlhdCI6MTYzNzkzNDU1MiwiZXhwIjoxNjM3OTM4MTUyfQ.EhD1y49Fwi5brOoEZzhFmAZgpE1pqp2iZRpvmG3U8nM',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWQ2ZTVkYmE1YjAzODIyNGFhZmZlMyIsImlhdCI6MTYzODEyOTIwNywiZXhwIjoxNjM4MTMyODA3fQ.MWjxtdeguqZgia4lv1Gk93Pq_Z3hkJhcdf8RsEN6NLQ',
   password: '$2a$10$cVs7Als2w3nmrwo2IH8Yr.dLRea5euHnLUV/6lBy99.ds3gaiBVWK',
   createdAt: '2021-11-23T22:42:37.360Z',
   updatedAt: '2021-11-24T10:37:56.607Z'
 }
 
-jest.spyOn(User, 'findByIdAndUpdate').mockImplementationOnce(() => user)
-
 const token = user.token
 
-describe('tests for the route api/users/avatars', () => {
+jest.spyOn(User, 'findByIdAndUpdate').mockImplementationOnce(() => user.avatarURL)
+jest.spyOn(User, 'findById').mockImplementationOnce(() => user)
+
+describe('tests for the route api/users/avatar', () => {
   it('Upload success should return 200 status', async () => {
     const buffer = await fs.readFile('./test/image.jpeg')
     const res = await request(app)
-      .patch('/api/users/avatars')
+      .patch('/api/users/avatar')
       .set('Authorization', `Bearer ${token}`)
       .attach('avatar', buffer, 'image.jpeg')
     expect(res.status).toEqual(200)

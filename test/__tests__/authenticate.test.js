@@ -7,7 +7,7 @@ const user = {
   email: 'evd@example.com',
   subscription: 'starter',
   avatarURL: '\\users\\619d6e5dba5b038224aaffe3\\619d6e5dba5b038224aaffe3_24-11-2021_12-37-56_images.jpeg',
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWQ2ZTVkYmE1YjAzODIyNGFhZmZlMyIsImlhdCI6MTYzNzc0ODgwMiwiZXhwIjoxNjM3NzUyNDAyfQ.8pPavuPu7xRj3vUyF1o2V7bO_vVtT07vguHvWuSEe4U',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWQ2ZTVkYmE1YjAzODIyNGFhZmZlMyIsImlhdCI6MTYzODExMDA2NywiZXhwIjoxNjM4MTEzNjY3fQ.xqwcH9sTQ8usqrjrWUAQZbGc2QxLxm8XmUY64MMZWLI',
   password: '$2a$10$cVs7Als2w3nmrwo2IH8Yr.dLRea5euHnLUV/6lBy99.ds3gaiBVWK',
   createdAt: '2021-11-23T22:42:37.360Z',
   updatedAt: '2021-11-24T10:37:56.607Z'
@@ -15,7 +15,7 @@ const user = {
 
 jest.spyOn(User, 'findById').mockImplementationOnce(() => user)
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWQ2ZTVkYmE1YjAzODIyNGFhZmZlMyIsImlhdCI6MTYzNzc0ODgwMiwiZXhwIjoxNjM3NzUyNDAyfQ.8pPavuPu7xRj3vUyF1o2V7bO_vVtT07vguHvWuSEe4U'
+const token = user.token
 
 const mockReq = {
   headers: {
