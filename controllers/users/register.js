@@ -1,6 +1,11 @@
+const gravatar = require('gravatar')
+const fs = require('fs/promises')
+const path = require('path')
 const { Conflict } = require('http-errors')
 
 const { User } = require('../../models')
+
+const avatarsDir = path.join(__dirname, '../../public/avatars')
 
 const register = async(req, res) => {
   const { email, password } = req.body
@@ -8,8 +13,12 @@ const register = async(req, res) => {
   if (user) {
     throw new Conflict('Email in use')
   }
-  const newUser = new User({ email })
+  const avatarURL = gravatar.url(email)
+  const newUser = new User({ email, avatarURL })
+
   newUser.setPassword(password)
+  const avatarsFolder = path.join(avatarsDir, String(newUser._id))
+  await fs.mkdir(avatarsFolder)
   await newUser.save()
   const { subscription } = newUser
 
