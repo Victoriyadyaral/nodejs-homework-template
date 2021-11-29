@@ -1,4 +1,4 @@
-const { Unauthorized } = require('http-errors')
+const { BadRequest } = require('http-errors')
 const jwt = require('jsonwebtoken')
 
 const { User } = require('../../models')
@@ -10,8 +10,8 @@ const login = async(req, res) => {
   const user = await User.findOne({ email })
   const subscription = user?.subscription ? user.subscription : 'starter'
 
-  if (!user || !user.comparePassword(password)) {
-    throw new Unauthorized('Email or password is wrong')
+  if (!user || !user.verify || !user.comparePassword(password)) {
+    throw new BadRequest('Email or password is wrong')
   }
 
   const payload = {
